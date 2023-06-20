@@ -1,11 +1,11 @@
 import torch.optim as optim
-from model import SentimentClassifier
 import torch.nn as nn
 from dataset import TweetDataset
 from torch.utils.data import DataLoader
 import torch, wandb
 from tqdm import tqdm
 from omegaconf import OmegaConf
+import models
 
 
 def train_one_epoch(model, data_loader, criterion, optimizer, device):
@@ -82,7 +82,7 @@ def main():
     val_loader = DataLoader(val_set, batch_size=32, num_workers=4)
 
     # Instantiate the model
-    model = SentimentClassifier(
+    model = getattr(models, cfg.model_name)(
         train_set.tokenizer,
         cfg.embedding_dim,
         cfg.hidden_dim,

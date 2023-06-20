@@ -6,3 +6,4 @@ output_dim: 3
 n_layers: 2
 bidirectional: True
 dropout: 0.1
+model_name: SentimentClassifierWithSoftAttention
